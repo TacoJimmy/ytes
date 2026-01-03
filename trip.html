@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>苗栗台中・鐵道草莓之戀 | 旅遊手冊</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+        body { font-family: 'Noto Sans TC', sans-serif; scroll-behavior: smooth; }
+        .timeline-item::before { content: ""; position: absolute; left: -9px; top: 0; width: 18px; height: 18px; background-color: #fbbf24; border-radius: 50%; border: 4px solid #fff; box-shadow: 0 0 0 2px #fbbf24; }
+        .active-tab { border-bottom: 4px solid #fbbf24; color: #b45309; font-weight: 700; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.5s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="bg-stone-50 text-slate-800">
+
+    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+        <nav class="max-w-6xl mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center">
+            <h1 class="text-2xl font-bold text-amber-700 mb-4 md:mb-0">🍓 苗栗台中・三日慢旅</h1>
+            <div class="flex space-x-2 md:space-x-6 overflow-x-auto whitespace-nowrap pb-2 md:pb-0">
+                <button onclick="showTab('summary')" class="nav-link px-2 py-1 transition active-tab" id="tab-summary">行程總覽</button>
+                <button onclick="showTab('transport')" class="nav-link px-2 py-1 transition" id="tab-transport">交通住宿</button>
+                <button onclick="showTab('itinerary')" class="nav-link px-2 py-1 transition" id="tab-itinerary">每日行程</button>
+                <button onclick="showTab('food')" class="nav-link px-2 py-1 transition" id="tab-food">美食地圖</button>
+                <button onclick="showTab('prep')" class="nav-link px-2 py-1 transition" id="tab-prep">行前準備</button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-8">
+        
+        <section id="summary" class="tab-content active">
+            <div class="bg-white rounded-3xl p-8 shadow-sm mb-8 border border-stone-100 text-center">
+                <h2 class="text-3xl font-bold mb-4">歡迎來到小班旅遊首選行程</h2>
+                <p class="text-slate-500 leading-relaxed max-w-2xl mx-auto">
+                    這是一份為「浪漫香草民宿」愛好者設計的深度旅遊計畫。結合了三義老街的懷舊、后豐鐵馬道的微風、高美濕地的夕陽，以及大湖草莓的香甜。
+                </p>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
+                    <div class="p-4 bg-amber-50 rounded-2xl"><p class="text-xs text-amber-600">日期</p><p class="font-bold">2/6 - 2/8</p></div>
+                    <div class="p-4 bg-amber-50 rounded-2xl"><p class="text-xs text-amber-600">天數</p><p class="font-bold">3 天 2 夜</p></div>
+                    <div class="p-4 bg-amber-50 rounded-2xl"><p class="text-xs text-amber-600">人數</p><p class="font-bold">小班團</p></div>
+                    <div class="p-4 bg-amber-50 rounded-2xl"><p class="text-xs text-amber-600">交通</p><p class="font-bold">自行開車</p></div>
+                </div>
+            </div>
+            <div class="bg-white rounded-3xl p-8 shadow-sm border border-stone-100">
+                <h3 class="text-xl font-bold mb-6">預估交通時間統計 (分鐘)</h3>
+                <canvas id="timeChart" height="150"></canvas>
+            </div>
+        </section>
+
+        <section id="transport" class="tab-content">
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white p-6 rounded-3xl shadow-sm border border-stone-100">
+                    <h3 class="text-xl font-bold mb-4 flex items-center">📍 住宿：浪漫香草民宿</h3>
+                    <p class="text-slate-600 mb-4">環境清幽，適合家庭與小班團體，備有廚房可進行包水餃活動。</p>
+                    <a href="https://www.google.com/maps/search/?api=1&query=浪漫香草民宿" target="_blank" class="inline-block bg-amber-500 text-white px-6 py-2 rounded-full hover:bg-amber-600 transition">Google Maps 導航</a>
+                </div>
+                <div class="bg-white p-6 rounded-3xl shadow-sm border border-stone-100">
+                    <h3 class="text-xl font-bold mb-4 flex items-center">🚗 交通資訊：自行開車</h3>
+                    <ul class="space-y-3 text-slate-600 text-sm">
+                        <li>• 出發點：新北市中和區</li>
+                        <li>• 中途點：國道一號 (三義交流道下)</li>
+                        <li>• 備註：2月為旅遊旺季，大湖段易塞車，建議提早出發。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="itinerary" class="tab-content">
+            <div class="mb-12">
+                <h3 class="text-2xl font-bold text-amber-600 mb-6 flex items-center">Day 1：三義鐵道時光 (2/6 週五)</h3>
+                <div class="ml-4 border-l-2 border-amber-200 pl-8 space-y-8">
+                    <div class="relative timeline-item">
+                        <span class="text-amber-500 font-bold">09:00</span>
+                        <h4 class="font-bold text-lg">中和出發</h4>
+                        <p class="text-sm text-slate-500">預計車程：2小時</p>
+                    </div>
+                    <div class="relative timeline-item">
+                        <span class="text-amber-500 font-bold">11:00 - 13:00</span>
+                        <h4 class="font-bold text-lg">三丘景觀餐廳 3 Hills café</h4>
+                        <p class="text-sm text-slate-500 mb-2">森林系景觀，用餐停留 120min</p>
+                        <a href="https://www.google.com/maps/search/?api=1&query=三丘景觀餐廳" target="_blank" class="text-xs text-blue-500 underline">導航至餐廳</a>
+                    </div>
+                    <div class="relative timeline-item">
+                        <span class="text-amber-500 font-bold">13:30 - 15:30</span>
+                        <h4 class="font-bold text-lg">舊山線鐵道自行車</h4>
+                        <p class="text-sm text-slate-500 mb-2">勝興車站出發，探索龍騰斷橋遺址</p>
+                        <a href="https://www.google.com/maps/search/?api=1&query=勝興車站" target="_blank" class="text-xs text-blue-500 underline">導航至車站</a>
+                    </div>
+                    <div class="relative timeline-item">
+                        <span class="text-amber-500 font-bold">16:00</span>
+                        <h4 class="font-bold text-lg">美食補給：賴新魁麵館</h4>
+                        <p class="text-sm text-slate-500 mb-2">三義超人氣客家麵食</p>
+                        <a href="https://www.google.com/maps/search/?api=1&query=賴新魁麵館" target="_blank" class="text-xs text-blue-500 underline">導航至麵館</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-12">
+                <h3 class="text-2xl font-bold text-amber-600 mb-6 flex items-center">Day 2：自然美景與手作體驗 (2/7 週六)</h3>
+                <div class="ml-4 border-l-2 border-amber-200 pl-8 space-y-8">
+                    <div class="relative timeline-item">
+                        <span class="text-amber-500 font-bold">10:00 - 13:00</span>
+                        <h4 class="font-bold text-lg">民宿手作時光：自製水餃</h4>
+                        <p class="text-sm text-slate-500">悠閒的早晨，共享包水餃與午餐樂趣</p>
+                    </div>
+                    <div class="relative timeline-item">
+                        <span class="text-amber-500 font-bold">13:30 - 16:00</span>
+                        <h4 class="font-bold text-lg">后豐鐵馬道</h4>
+                        <p class="text-sm text-slate-500 mb-2">必經：花樑鋼橋、九號隧道</p>
+                        <a href="https://www.google.com/maps/search/?api=1&query=后豐鐵馬道" target="_blank" class="text-xs text-blue-500 underline">導航至起點</a>
+                    </div>
+                    <div class="relative timeline-item">
+                        <span class="text-amber-500 font-bold">16:30 - 18:00</span>
+                        <h4 class="font-bold text-lg">高美濕地</h4>
+                        <p class="text-sm text-slate-500 mb-2">觀賞夕陽與招潮蟹</p>
+                        <a href="https://www.google.com/maps/search/?api=1&query=高美濕地" target="_blank" class="text-xs text-blue-500 underline">導航至濕地</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mb-12">
+                <h3 class="text-2xl font-bold text-amber-600 mb-6 flex items-center">Day 3：大湖採草莓之約 (2/8 週日)</h3>
+                <div class="ml-4 border-l-2 border-amber-200 pl-8 space-y-8">
+                    <div class="relative timeline-item">
+                        <span class="text-amber-500 font-bold">11:00</span>
+                        <h4 class="font-bold text-lg">Check out 浪漫香草民宿</h4>
+                    </div>
+                    <div class="relative timeline-item">
+                        <span class="text-amber-500 font-bold">12:00 - 14:30</span>
+                        <h4 class="font-bold text-lg">大湖採草莓 + 午餐</h4>
+                        <p class="text-sm text-slate-500 mb-2">建議前往馬那邦山腳下，草莓更大顆</p>
+                        <a href="https://www.google.com/maps/search/?api=1&query=大湖草莓園" target="_blank" class="text-xs text-blue-500 underline">搜尋草莓園</a>
+                    </div>
+                    <div class="relative timeline-item border-l-0">
+                        <span class="text-amber-500 font-bold">14:30</span>
+                        <h4 class="font-bold text-lg text-slate-400">滿載而歸 (歸賦)</h4>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="food" class="tab-content">
+            <div class="flex flex-wrap gap-2 mb-8" id="food-filters">
+                <button onclick="filterFood('all')" class="bg-amber-100 text-amber-800 px-4 py-1 rounded-full text-sm">全部</button>
+                <button onclick="filterFood('hakka')" class="bg-stone-200 px-4 py-1 rounded-full text-sm hover:bg-amber-100 transition">客家味</button>
+                <button onclick="filterFood('scenic')" class="bg-stone-200 px-4 py-1 rounded-full text-sm hover:bg-amber-100 transition">景觀</button>
+                <button onclick="filterFood('local')" class="bg-stone-200 px-4 py-1 rounded-full text-sm hover:bg-amber-100 transition">在地小吃</button>
+            </div>
+            <div class="grid md:grid-cols-2 gap-4" id="food-list">
+                <div class="food-item bg-white p-6 rounded-2xl shadow-sm border border-stone-100" data-type="scenic">
+                    <h4 class="font-bold text-lg">三丘景觀餐廳</h4>
+                    <p class="text-sm text-slate-500 mb-4">森林系老宅，氛圍極佳。</p>
+                    <a href="https://www.google.com/maps/search/?api=1&query=三丘景觀餐廳" target="_blank" class="text-blue-500 text-sm italic underline">查看地圖</a>
+                </div>
+                <div class="food-item bg-white p-6 rounded-2xl shadow-sm border border-stone-100" data-type="hakka local">
+                    <h4 class="font-bold text-lg">賴新魁麵館</h4>
+                    <p class="text-sm text-slate-500 mb-4">必點：客家粄條、滷蛋、切肉。</p>
+                    <a href="https://www.google.com/maps/search/?api=1&query=賴新魁麵館" target="_blank" class="text-blue-500 text-sm italic underline">查看地圖</a>
+                </div>
+                <div class="food-item bg-white p-6 rounded-2xl shadow-sm border border-stone-100" data-type="hakka">
+                    <h4 class="font-bold text-lg">客家鹹湯圓 (民宿晚餐)</h4>
+                    <p class="text-sm text-slate-500 mb-4">道地客家風味，暖胃首選。</p>
+                </div>
+                <div class="food-item bg-white p-6 rounded-2xl shadow-sm border border-stone-100" data-type="local">
+                    <h4 class="font-bold text-lg">清水米糕 (高美附近)</h4>
+                    <p class="text-sm text-slate-500 mb-4">推薦：王塔或阿財米糕。</p>
+                    <a href="https://www.google.com/maps/search/?api=1&query=清水米糕" target="_blank" class="text-blue-500 text-sm italic underline">查看地圖</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="prep" class="tab-content">
+            <div class="bg-amber-50 p-8 rounded-3xl border border-amber-100">
+                <h3 class="text-xl font-bold mb-6">🧳 行前檢查清單</h3>
+                <ul class="grid md:grid-cols-2 gap-4">
+                    <li class="flex items-center space-x-2">
+                        <input type="checkbox" class="w-5 h-5 rounded border-amber-300">
+                        <span>預約舊山線鐵道自行車 (非常重要)</span>
+                    </li>
+                    <li class="flex items-center space-x-2">
+                        <input type="checkbox" class="w-5 h-5 rounded border-amber-300">
+                        <span>保暖衣物 (高美濕地風大)</span>
+                    </li>
+                    <li class="flex items-center space-x-2">
+                        <input type="checkbox" class="w-5 h-5 rounded border-amber-300">
+                        <span>採草莓專用防污鞋套</span>
+                    </li>
+                    <li class="flex items-center space-x-2">
+                        <input type="checkbox" class="w-5 h-5 rounded border-amber-300">
+                        <span>相機/行動電源</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="max-w-4xl mx-auto px-4 py-12 text-center text-slate-400 text-sm">
+        <p>© 2026 您的專業旅遊規劃師 - 祝您旅途愉快</p>
+    </footer>
+
+    <script>
+        // SPA Logic
+        function showTab(tabId) {
+            // Hide all contents
+            document.querySelectorAll('.tab-content').forEach(el => {
+                el.classList.remove('active');
+            });
+            // Show selected content
+            document.getElementById(tabId).classList.add('active');
+            
+            // Update Tab Styling
+            document.querySelectorAll('.nav-link').forEach(el => {
+                el.classList.remove('active-tab');
+            });
+            document.getElementById('tab-' + tabId).classList.add('active-tab');
+        }
+
+        // Food Filter Logic
+        function filterFood(type) {
+            const items = document.querySelectorAll('.food-item');
+            items.forEach(item => {
+                if (type === 'all' || item.getAttribute('data-type').includes(type)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+            
+            // Highlight active filter button
+            document.querySelectorAll('#food-filters button').forEach(btn => {
+                btn.classList.remove('bg-amber-100', 'text-amber-800');
+                btn.classList.add('bg-stone-200');
+            });
+            event.target.classList.remove('bg-stone-200');
+            event.target.classList.add('bg-amber-100', 'text-amber-800');
+        }
+
+        // Chart.js Configuration
+        const ctx = document.getElementById('timeChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['中和-三義', '三義-后里', '后里-高美', '后里-大湖', '大湖-中和'],
+                datasets: [{
+                    label: '預估車程 (分鐘)',
+                    data: [110, 25, 40, 35, 120],
+                    backgroundColor: 'rgba(251, 191, 36, 0.6)',
+                    borderColor: 'rgba(251, 191, 36, 1)',
+                    borderWidth: 2,
+                    borderRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: { beginAtZero: true, grid: { display: false } },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
