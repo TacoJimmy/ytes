@@ -3,147 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>苗栗台中・鐵道草莓之戀 | 旅遊手冊</title>
+    <title>苗栗人文採果之旅 | 旅遊手冊</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
         body { font-family: 'Noto Sans TC', sans-serif; -webkit-tap-highlight-color: transparent; }
-        .active-tab { background-color: #fbbf24; color: #78350f; font-weight: 700; transform: scale(1.05); }
+        .active-tab { background-color: #4b5563; color: white; transform: scale(1.05); }
         .tab-content { display: none; }
         .tab-content.active { display: block; animation: slideUp 0.4s ease-out; }
         @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        /* 隱藏捲軸但保持滾動功能 */
         .no-scrollbar::-webkit-scrollbar { display: none; }
+        .timeline-dot { width: 12px; height: 12px; background: #fbbf24; border-radius: 50%; position: absolute; left: -31px; top: 6px; border: 2px solid white; box-shadow: 0 0 0 2px #fbbf24; }
     </style>
 </head>
 <body class="bg-stone-50 text-slate-800 antialiased">
 
     <header class="bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-stone-200">
         <nav class="max-w-6xl mx-auto">
-            <div class="p-4 text-center md:text-left md:px-8">
-                <h1 class="text-xl md:text-2xl font-bold text-amber-800">🍓 苗栗台中三日遊</h1>
+            <div class="p-4 flex justify-between items-center">
+                <h1 class="text-xl font-bold text-emerald-800">🌿 苗栗人文採果之旅</h1>
+                <span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-1 rounded">2026/02/06 - 02/08</span>
             </div>
-            <div class="flex overflow-x-auto no-scrollbar px-4 pb-3 space-x-2 md:justify-center">
-                <button onclick="showTab('summary')" id="tab-summary" class="nav-link flex-none px-5 py-2 rounded-full text-sm bg-stone-100 transition-all active-tab">總覽</button>
-                <button onclick="showTab('itinerary')" id="tab-itinerary" class="nav-link flex-none px-5 py-2 rounded-full text-sm bg-stone-100 transition-all">詳細行程</button>
-                <button onclick="showTab('food')" id="tab-food" class="nav-link flex-none px-5 py-2 rounded-full text-sm bg-stone-100 transition-all">美食地圖</button>
-                <button onclick="showTab('transport')" id="tab-transport" class="nav-link flex-none px-5 py-2 rounded-full text-sm bg-stone-100 transition-all">交通住宿</button>
-                <button onclick="showTab('prep')" id="tab-prep" class="nav-link flex-none px-5 py-2 rounded-full text-sm bg-stone-100 transition-all">行前準備</button>
+            <div class="flex overflow-x-auto no-scrollbar px-4 pb-3 space-x-2">
+                <button onclick="showTab('summary')" id="tab-summary" class="nav-link flex-none px-6 py-2 rounded-full text-sm bg-stone-200 transition-all active-tab">總覽</button>
+                <button onclick="showTab('day1')" id="tab-day1" class="nav-link flex-none px-6 py-2 rounded-full text-sm bg-stone-200 transition-all">D1 三義</button>
+                <button onclick="showTab('day2')" id="tab-day2" class="nav-link flex-none px-6 py-2 rounded-full text-sm bg-stone-200 transition-all">D2 採果</button>
+                <button onclick="showTab('day3')" id="tab-day3" class="nav-link flex-none px-6 py-2 rounded-full text-sm bg-stone-200 transition-all">D3 華陶窯</button>
             </div>
         </nav>
     </header>
 
-    <main class="max-w-4xl mx-auto px-4 py-6 md:py-10">
+    <main class="max-w-4xl mx-auto px-4 py-6">
         
         <section id="summary" class="tab-content active">
-            <div class="bg-gradient-to-br from-amber-500 to-orange-600 rounded-3xl p-6 md:p-10 text-white shadow-xl mb-6">
-                <h2 class="text-2xl md:text-4xl font-bold mb-2">小班旅遊：鐵道與草莓</h2>
-                <p class="opacity-90 text-sm md:text-base">2026/02/06 - 02/08 · 浪漫香草民宿</p>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-6">
-                    <div class="bg-white/20 backdrop-blur-sm p-3 rounded-xl text-center text-sm">📅 2月週五出發</div>
-                    <div class="bg-white/20 backdrop-blur-sm p-3 rounded-xl text-center text-sm">🚗 自駕輕鬆遊</div>
-                    <div class="bg-white/20 backdrop-blur-sm p-3 rounded-xl text-center text-sm">🥟 手作水餃體驗</div>
-                    <div class="bg-white/20 backdrop-blur-sm p-3 rounded-xl text-center text-sm">🍓 大湖採草莓</div>
+            <div class="bg-emerald-700 rounded-3xl p-6 text-white shadow-xl mb-6">
+                <h2 class="text-2xl font-bold mb-2">慢活山城．人文饗宴</h2>
+                <p class="opacity-80 text-sm">鐵道、葡萄採擷、自製果醋、華陶窯古樸美學</p>
+                <div class="grid grid-cols-2 gap-3 mt-6">
+                    <div class="bg-white/10 p-3 rounded-xl border border-white/20">📍 浪漫香草民宿</div>
+                    <div class="bg-white/10 p-3 rounded-xl border border-white/20">🍇 松原農庄採果</div>
+                    <div class="bg-white/10 p-3 rounded-xl border border-white/20">🚲 C路線鐵道車</div>
+                    <div class="bg-white/10 p-3 rounded-xl border border-white/20">🏺 華陶窯園林</div>
                 </div>
             </div>
-            
-            <div class="bg-white rounded-3xl p-4 md:p-8 shadow-sm border border-stone-200">
-                <h3 class="text-lg font-bold mb-4 text-stone-700">📊 預估交通壓力分析</h3>
-                <div class="relative h-[250px] w-full">
-                    <canvas id="timeChart"></canvas>
-                </div>
+            <div class="bg-white rounded-3xl p-6 shadow-sm border border-stone-200">
+                <h3 class="text-lg font-bold mb-4">📈 行程能量分配 (預估體力消耗)</h3>
+                <canvas id="energyChart" height="200"></canvas>
             </div>
         </section>
 
-        <section id="itinerary" class="tab-content">
-            <div class="space-y-10">
-                <div class="bg-white rounded-3xl shadow-sm border border-stone-100 overflow-hidden">
-                    <div class="bg-amber-50 px-6 py-4 border-b border-amber-100">
-                        <h3 class="font-bold text-amber-800">DAY 1 - 2/6 (週五) 三義老街情</h3>
-                    </div>
-                    <div class="p-6 space-y-6 relative">
-                        <div class="absolute left-9 top-10 bottom-10 w-0.5 bg-amber-100"></div>
-                        <div class="flex items-start space-x-4 relative">
-                            <div class="bg-amber-400 w-6 h-6 rounded-full flex-none ring-4 ring-white z-10"></div>
-                            <div>
-                                <p class="text-xs text-amber-600 font-bold uppercase">09:00</p>
-                                <h4 class="font-bold">從中和出發</h4>
-                                <p class="text-sm text-slate-500">國道一號南下，開啟度假模式</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start space-x-4 relative">
-                            <div class="bg-amber-400 w-6 h-6 rounded-full flex-none ring-4 ring-white z-10"></div>
-                            <div>
-                                <p class="text-xs text-amber-600 font-bold uppercase">11:00</p>
-                                <h4 class="font-bold text-blue-600 underline"><a href="https://maps.app.goo.gl/3Hills">三丘景觀餐廳 3 Hills café</a></h4>
-                                <p class="text-sm text-slate-500 italic">在山林與鐵道交界享用午餐</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start space-x-4 relative">
-                            <div class="bg-amber-400 w-6 h-6 rounded-full flex-none ring-4 ring-white z-10"></div>
-                            <div>
-                                <p class="text-xs text-amber-600 font-bold uppercase">13:30</p>
-                                <h4 class="font-bold">舊山線鐵道自行車</h4>
-                                <p class="text-sm text-slate-500">預約勝興站發車，吹吹山風</p>
-                            </div>
-                        </div>
+        <section id="day1" class="tab-content">
+            <div class="space-y-6">
+                <div class="bg-white p-6 rounded-3xl shadow-sm border border-stone-100">
+                    <h3 class="text-emerald-700 font-bold mb-6 flex items-center">🕒 2/6 三義山城老鐵道</h3>
+                    <div class="ml-6 border-l-2 border-emerald-100 pl-8 space-y-8 relative">
+                        <div class="relative"><div class="timeline-dot"></div><p class="text-xs font-bold text-emerald-600">09:00</p><h4 class="font-bold">中和出發</h4></div>
+                        <div class="relative"><div class="timeline-dot"></div><p class="text-xs font-bold text-emerald-600">11:00</p><h4 class="font-bold underline"><a href="https://www.google.com/maps/search/三丘景觀餐廳">三丘景觀餐廳</a></h4><p class="text-sm text-slate-500 italic">森林系老宅早午餐</p></div>
+                        <div class="relative"><div class="timeline-dot"></div><p class="text-xs font-bold text-emerald-600">12:30</p><h4 class="font-bold">舊山線 Rail Bike C路線</h4><p class="text-sm text-slate-500">遙望龍騰斷橋壯麗景色</p></div>
+                        <div class="relative"><div class="timeline-dot"></div><p class="text-xs font-bold text-emerald-600">14:30</p><h4 class="font-bold underline"><a href="https://www.google.com/maps/search/賴新魁麵館">賴新魁麵館</a></h4><p class="text-sm text-slate-500">粄條加蛋加滷肉的經典味</p></div>
+                        <div class="relative"><div class="timeline-dot"></div><p class="text-xs font-bold text-emerald-600">19:00</p><h4 class="font-bold text-orange-600">晚餐：客家鹹湯圓</h4></div>
                     </div>
                 </div>
-
-                <div class="text-center py-4 text-slate-400 text-sm italic">點選導覽列查看更多細節</div>
             </div>
         </section>
 
-        <section id="food" class="tab-content">
-            <div class="flex space-x-2 mb-6 overflow-x-auto no-scrollbar pb-2">
-                <button onclick="filterFood('all')" class="food-btn whitespace-nowrap px-4 py-2 rounded-xl bg-amber-500 text-white shadow-md">全部</button>
-                <button onclick="filterFood('local')" class="food-btn whitespace-nowrap px-4 py-2 rounded-xl bg-white border border-stone-200">在地小吃</button>
-                <button onclick="filterFood('scenic')" class="food-btn whitespace-nowrap px-4 py-2 rounded-xl bg-white border border-stone-200">網美餐廳</button>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="food-list">
-                <div class="food-item bg-white p-5 rounded-2xl border border-stone-100 shadow-sm" data-type="scenic">
-                    <span class="text-xs font-bold text-amber-500">#網美餐廳</span>
-                    <h4 class="font-bold text-lg mt-1">三丘景觀餐廳</h4>
-                    <a href="#" class="text-blue-500 text-sm underline mt-2 block italic">開啟 Google Maps</a>
-                </div>
-                <div class="food-item bg-white p-5 rounded-2xl border border-stone-100 shadow-sm" data-type="local">
-                    <span class="text-xs font-bold text-blue-500">#在地小吃</span>
-                    <h4 class="font-bold text-lg mt-1">賴新魁麵館</h4>
-                    <p class="text-sm text-slate-500">2月人潮多，16:00去剛好不用排隊</p>
+        <section id="day2" class="tab-content">
+            <div class="space-y-6">
+                <div class="bg-white p-6 rounded-3xl shadow-sm border border-stone-100">
+                    <h3 class="text-emerald-700 font-bold mb-6 flex items-center">🕒 2/7 自行車 & 採果 DIY</h3>
+                    <div class="ml-6 border-l-2 border-emerald-100 pl-8 space-y-8 relative">
+                        <div class="relative"><div class="timeline-dot"></div><p class="text-xs font-bold text-emerald-600">09:00</p><h4 class="font-bold">后豐鐵馬道</h4><p class="text-sm text-slate-500 italic">晨間單車漫遊</p></div>
+                        <div class="relative"><div class="timeline-dot"></div><p class="text-xs font-bold text-emerald-600">12:00</p><h4 class="font-bold underline"><a href="https://www.google.com/maps/search/龍之居平價土雞城">龍之居平價土雞城</a></h4><p class="text-sm text-slate-500">傳統鄉間野宴</p></div>
+                        <div class="relative"><div class="timeline-dot"></div><p class="text-xs font-bold text-emerald-600">14:00</p><h4 class="font-bold text-purple-700 underline"><a href="https://www.google.com/maps/search/松原農庄">松原農庄採葡萄</a></h4><p class="text-sm text-slate-500 italic">體驗親手採下一串串新鮮</p></div>
+                        <div class="relative"><div class="timeline-dot"></div><p class="text-xs font-bold text-emerald-600">17:30</p><h4 class="font-bold">民宿晚餐：熱呼呼火鍋</h4></div>
+                        <div class="relative"><div class="timeline-dot"></div><p class="text-xs font-bold text-emerald-600">20:00</p><h4 class="font-bold text-emerald-700">DIY 果醋與果醬</h4><p class="text-sm text-slate-500 italic">封存時光，4-6個月後品嚐</p></div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section id="transport" class="tab-content">
-            <div class="bg-white rounded-3xl p-6 border border-stone-200">
-                <h3 class="font-bold text-xl mb-4">🏠 浪漫香草民宿</h3>
-                <div class="aspect-video w-full bg-stone-100 rounded-xl mb-4 flex items-center justify-center text-stone-400">
-                    地圖佔位 (可嵌入 Google Maps iframe)
-                </div>
-                <ul class="space-y-4 text-slate-600">
-                    <li class="flex items-center space-x-3"><span>📍</span> <span>地址：苗栗縣大湖鄉（詳細地圖點選下方）</span></li>
-                    <li class="flex items-center space-x-3"><span>🍳</span> <span>設施：有廚房，週六中午可包水餃</span></li>
-                </ul>
-            </div>
-        </section>
-
-        <section id="prep" class="tab-content">
-            <div class="bg-white rounded-3xl p-6 border border-stone-200">
-                <h3 class="font-bold text-xl mb-6">🧳 攜帶建議</h3>
-                <div class="space-y-4">
-                    <label class="flex items-center space-x-3 p-4 bg-stone-50 rounded-2xl cursor-pointer">
-                        <input type="checkbox" class="w-5 h-5 accent-amber-500">
-                        <span class="text-slate-700">預約鐵道自行車 (勝興站)</span>
-                    </label>
-                    <label class="flex items-center space-x-3 p-4 bg-stone-50 rounded-2xl cursor-pointer">
-                        <input type="checkbox" class="w-5 h-5 accent-amber-500">
-                        <span class="text-slate-700">厚外套 (高美濕地風極大)</span>
-                    </label>
-                    <label class="flex items-center space-x-3 p-4 bg-stone-50 rounded-2xl cursor-pointer">
-                        <input type="checkbox" class="w-5 h-5 accent-amber-500">
-                        <span class="text-slate-700">行動電源與傳輸線</span>
-                    </label>
+        <section id="day3" class="tab-content">
+            <div class="space-y-6">
+                <div class="bg-white p-6 rounded-3xl shadow-sm border border-stone-100">
+                    <h3 class="text-emerald-700 font-bold mb-6 flex items-center">🕒 2/8 華陶窯古樸美學</h3>
+                    <div class="ml-6 border-l-2 border-emerald-100 pl-8 space-y-8 relative">
+                        <div class="relative"><div class="timeline-dot"></div><p class="text-xs font-bold text-emerald-600">08:00</p><h4 class="font-bold">手作果醬早餐</h4><p class="text-sm text-slate-500 italic">搭配熱騰騰吐司</p></div>
+                        <div class="relative"><div class="timeline-dot"></div><p class="text-xs font-bold text-emerald-600">11:00</p><h4 class="font-bold">Check out 退房</h4></div>
+                        <div class="relative"><div class="timeline-dot"></div><p class="text-xs font-bold text-emerald-600">11:30</p><h4 class="font-bold underline"><a href="https://www.google.com/maps/search/華陶窯">華陶窯園區 + 午餐</a></h4><p class="text-sm text-slate-500 italic">江南風情閣樓、古屋老宅建築之美</p></div>
+                        <div class="relative"><div class="timeline-dot"></div><p class="text-xs font-bold text-emerald-600">14:30</p><h4 class="font-bold text-stone-400 font-bold italic">帶著滿滿回憶歸賦</h4></div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -151,53 +100,31 @@
     </main>
 
     <script>
-        // SPA 頁面切換優化
         function showTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
             document.getElementById(tabId).classList.add('active');
-            
             document.querySelectorAll('.nav-link').forEach(el => el.classList.remove('active-tab'));
             document.getElementById('tab-' + tabId).classList.add('active-tab');
-
-            // 切換後自動滾動到頂部（手機體驗優化）
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // 美食篩選器
-        function filterFood(type) {
-            document.querySelectorAll('.food-item').forEach(item => {
-                item.style.display = (type === 'all' || item.dataset.type === type) ? 'block' : 'none';
-            });
-            // 切換按鈕樣式
-            document.querySelectorAll('.food-btn').forEach(btn => {
-                btn.classList.remove('bg-amber-500', 'text-white');
-                btn.classList.add('bg-white', 'text-slate-800');
-            });
-            event.target.classList.add('bg-amber-500', 'text-white');
-        }
-
-        // Chart.js 響應式優化
-        const ctx = document.getElementById('timeChart').getContext('2d');
+        const ctx = document.getElementById('energyChart').getContext('2d');
         new Chart(ctx, {
-            type: 'line',
+            type: 'radar',
             data: {
-                labels: ['D1出發', 'D1景點間', 'D2濕地', 'D3草莓', 'D3返程'],
+                labels: ['人文藝術', '戶外運動', '美食享受', 'DIY手作', '放鬆程度'],
                 datasets: [{
-                    label: '車程(min)',
-                    data: [110, 20, 45, 30, 130],
-                    borderColor: '#f59e0b',
-                    backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                    label: '行程特色',
+                    data: [9, 7, 8, 10, 8],
                     fill: true,
-                    tension: 0.4,
-                    pointRadius: 6,
-                    pointBackgroundColor: '#f59e0b'
+                    backgroundColor: 'rgba(16, 185, 129, 0.2)',
+                    borderColor: 'rgb(16, 185, 129)',
+                    pointBackgroundColor: 'rgb(16, 185, 129)',
                 }]
             },
             options: {
-                responsive: true,
-                maintainAspectRatio: false,
                 plugins: { legend: { display: false } },
-                scales: { y: { display: false } }
+                scales: { r: { suggestMin: 0, suggestMax: 10, ticks: { display: false } } }
             }
         });
     </script>
